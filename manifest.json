@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Timeline-Unsubscribe",
+  "description": "People should have an option to unsubscribe from directly from timeline!",
+  "version": "1",
+  "author": "Yuri Dorogoy",
+
+  "content_scripts":
+  [{
+    "matches": ["*://facebook.com/"],
+    "js": ["cash.min.js", "main.js"],
+    "run_at": "document_idle"
+  }],
+  "browser_action": {
+    "default_icon": "tab-icon.png",
+    "default_title": "Easy way to remove all the trash"
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}
