@@ -12,8 +12,8 @@ function sleep(ms) {
 
 log("Easy Unsubscribe started");
 
-let generateUnsubscribeButton = () => {
-    return $('<div id="unsubscribe" style="padding-right:33px; padding-top: 10px; float: right"><span><a href="#"><img id="image" width="20px" src="' + chrome.runtime.getURL('hide.png') + '" /></a></span></div>')
+let generateUnsubscribeButton = (classes) => {
+    return $('<div id="unsubscribe" class="' + classes +'"style="padding-right:33px; padding-top: 10px; float: right"><span><a href="#"><img class="unsee-btn" id="image" width="20px" src="' + chrome.runtime.getURL('hide.png') + '" /></a></span></div>')
 };
 
 let emulateClick = (target) => {
@@ -39,7 +39,7 @@ let waitForSelector = (sel, onReady, maxtimeout = 5000.) => {
             clearInterval(handler);
             onReady(res[0])
         }
-    }, 30);
+    }, 0);
 
     setTimeout(() => {
         clearInterval(handler);
@@ -48,12 +48,15 @@ let waitForSelector = (sel, onReady, maxtimeout = 5000.) => {
 
 
 let IsAds = (div) => {
+    return false;
  let storysubtitle = $(div).find("[data-testid='story-subtitle']");
  let a =   $(storysubtitle[0]).find("a");
  let subtitle = '';
- $(a[0]).find("span").filter(":visible").each((inx, val)=>{
+ $(a[0]).find("*").filter(":visible").each((inx, val)=>{
      subtitle += val.innerText;
  });
+
+ console.log(subtitle);
     if (containDigits.test(subtitle)) {
         return false;
     } else {
@@ -86,7 +89,7 @@ let update = function () {
                 h5s.css("padding-right: 43px!important");
             }
 
-            let subscribeButton = generateUnsubscribeButton().appendTo(buttonContainer)[0];
+            let subscribeButton = generateUnsubscribeButton(threedots.parentNode.className).appendTo(buttonContainer)[0];
             subscribeButton.onclick = () => {
                 log("clicking unsubscribe");
                 emulateClick(threedots);
@@ -146,4 +149,18 @@ let update = function () {
 
 window.onscroll = update;
 update();
-$(document).ready(update);
+let baseY;
+$(document).ready(()=>{
+    baseY = window.pageYOffset;
+    let handler = setInterval(()=>{
+        console.log(window.pageYOffset, '    ', baseY);
+        if (window.pageYOffset !== baseY) {
+            clearInterval(handler);
+            update();
+            setTimeout(update, 300);
+            setTimeout(update, 500);
+            setTimeout(update, 800);
+        }
+    }, 300);
+    update()
+});
