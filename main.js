@@ -48,7 +48,7 @@ let waitForSelector = (sel, onReady, maxtimeout = 5000.) => {
 
 
 let IsAds = (div) => {
-    return false;
+ return false;
  let storysubtitle = $(div).find("[data-testid='story-subtitle']");
  let a =   $(storysubtitle[0]).find("a");
  let subtitle = '';
@@ -89,7 +89,7 @@ let update = function () {
                 h5s.css("padding-right: 43px!important");
             }
 
-            let subscribeButton = generateUnsubscribeButton(threedots.parentNode.className).appendTo(buttonContainer)[0];
+            let subscribeButton = generateUnsubscribeButton(threedots.parentNode.className).prependTo(buttonContainer)[0];
             subscribeButton.onclick = () => {
                 log("clicking unsubscribe");
                 emulateClick(threedots);
