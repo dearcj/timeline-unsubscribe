@@ -13,7 +13,7 @@ function sleep(ms) {
 log("Easy Unsubscribe started");
 
 let generateUnsubscribeButton = (classes) => {
-    return $('<div id="unsubscribe" class="' + classes +'"style="padding-right:33px; padding-top: 10px; float: right"><span><a href="#"><img class="unsee-btn" id="image" width="20px" src="' + chrome.runtime.getURL('hide.png') + '" /></a></span></div>')
+    return $('<div id="unsubscribe" class="' + classes +'"style="padding-right:33px; padding-top: 7px; float: right"><span><a href="#"><img class="unsee-btn" id="image" width="25px" src="' + chrome.runtime.getURL('hide3.png') + '" /></a></span></div>')
 };
 
 let emulateClick = (target) => {
