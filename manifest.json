@@ -1,25 +1,25 @@
 {
   "manifest_version": 2,
   "name": "Timeline Unsee",
-  "description": "People should have an option to unsubscribe from directly from timeline! only for facebook right now",
-  "version": "1",
+  "description": "Unsubscribe from anything directly from timeline in one click! Supports: Facebook",
+  "version": "0.1",
   "author": "Yuri Dorogoy",
 
   "content_scripts":
   [{
-    "matches": ["https://*/*", "http://*/*"],
+    "matches": ["*://www.facebook.com/*"],
     "css": [ "button.css" ],
     "js": ["cash.min.js", "main.js"],
     "run_at": "document_end"
   }],
   "permissions": [
-    "*://www.facebook.com/*", "tabs", "webNavigation"
+    "*://www.facebook.com/*", "activeTab"
   ],
   "web_accessible_resources": [
     "hide3.png"
   ],
   "browser_action": {
-    "default_icon": "tab-icon.png",
+    "default_icon": "tabico.png",
     "default_title": "Timeline unsee"
   }
 }
